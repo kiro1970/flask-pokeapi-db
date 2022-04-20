@@ -2,6 +2,18 @@
 {% include 'components/footer.html' %}
 
 {% block leftcol %}
+<div class="row text-center">
+    <form class="row" action="/results" method="POST">
+            {{ form.hidden_tag() }}
+        <div class="col-6">
+            {{ form.battlenum(class="col-4 m-5 form-control form-control-lg", placeholder="Search by battle number") }}
+        </div>
+        <div class="col-6">
+            {{ form.submit(class="col-4 m-5 btn btn-danger border form-control form-control-lg")}}
+        </div>
+    </form>
+</div>
+<h3>Searched battle's result</h3>
 <table>
     <tr>
         <th>Your Opponent</th>
@@ -12,9 +24,23 @@
         <td></td>
     </tr>
 </table> 
+
 {% endblock leftcol %}
 
 {% block rightcol %} 
+<h3>Your last battle's result</h3>
+<table>
+    <tr>
+        <th>Your Opponent</th>
+        <th>Opponent's Pokemon</th>
+        <th>Result</th>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+</table> 
+
+<h3>All previous Battle Results</h3>
 <table>
     <tr>
         <th>Your Opponent</th>

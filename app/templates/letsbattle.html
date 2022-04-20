@@ -2,7 +2,7 @@
 {% include 'components/footer.html' %}
 
 {% block content %}
-<div class="container m-2">
+<div class="container m-1">
     <div class="row">
         <form class="row" action="/letsbattle" method="POST">
             {{ form.hidden_tag() }}
@@ -22,7 +22,7 @@
 
 
 {% block leftcol %} 
-<div class="bg-white m-5 text-primary text-center">
+<div class="bg-white mt-1 m-3 text-primary text-center">
     <div class="m-5">
         <img src="{{ pokemon1.sprite }}" alt="">
         <h4>Pokemon: </h4><p>{{ pokemon1.name }}</p>
@@ -36,8 +36,8 @@
 {% endblock leftcol %} 
 
 {% block rightcol %} 
-<div class="bg-white m-5 text-danger text-center">
-    <div class="m-5">
+<div class="bg-white mt-1 m-5 text-danger text-center">
+    <div class="m-3">
         <img src="{{ pokemon2.sprite }}" alt="">
         <h4>Pokemon: </h4><p>{{ pokemon2.name }}</p>
         <h4>Attack: </h4><p>{{ pokemon2.attack }}</p>

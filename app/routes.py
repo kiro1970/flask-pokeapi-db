@@ -6,7 +6,7 @@ import requests
 import json
 print('LOADING ROUTES 2')
 from app import services
-from .forms import PokeForm
+from .forms import PokeForm, PokeResults
 from app import db
 from app.models import BattleDB
 #from services import Pokemon
@@ -55,11 +55,11 @@ def battle():
     db.session.commit()
     return render_template('letsbattle.html', form=form, title="Let's Battle!", winner=winner, pokemon1=pokemon1, pokemon2=pokemon2)
 
-@app.route('/results')
+@app.route('/results', methods=['POST', 'GET']) 
 def results():
+    form = PokeResults()
     all = BattleDB.query.all()
 
-
-    return render_template('results.html', all=all)
+    return render_template('results.html', form=form, all=all)
     
 
