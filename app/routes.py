@@ -7,6 +7,8 @@ import json
 print('LOADING ROUTES 2')
 from app import services
 from .forms import PokeForm
+from app import db
+from app.models import BattleDB
 #from services import Pokemon
 #from services import getpokedata
 print('LOADING ROUTES 3')
@@ -48,8 +50,16 @@ def battle():
     else:
          winner = pokemon2
     print(winner.name)
-    
-# DO BATTLE MATH - RETURN WINNER
-
+    battle = BattleDB(YourPokemon=pokemon1.name, OpponentsPokemon=pokemon2.name, Winner=winner.name)
+    db.session.add(battle)
+    db.session.commit()
     return render_template('letsbattle.html', form=form, title="Let's Battle!", winner=winner, pokemon1=pokemon1, pokemon2=pokemon2)
+
+@app.route('/results')
+def results():
+    all = BattleDB.query.all()
+
+
+    return render_template('results.html', all=all)
+    
 
