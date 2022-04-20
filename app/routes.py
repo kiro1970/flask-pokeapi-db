@@ -58,8 +58,7 @@ def battle():
 @app.route('/results', methods=['POST', 'GET']) 
 def results():
     form = PokeResults()
-    all = BattleDB.query.all()
-
-    return render_template('results.html', form=form, all=all)
+    lines = BattleDB.query.all()
+    return render_template('results.html', form=form, lines=lines)
     
 
