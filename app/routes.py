@@ -1,21 +1,15 @@
-print('LOADING ROUTES')
 from urllib import response
 from app import app
 from flask import render_template, request,jsonify
 import requests
 import json
-print('LOADING ROUTES 2')
 from app import services
 from .forms import PokeForm, PokeResults
 from app import db
 from app.models import BattleDB
-#from services import Pokemon
-#from services import getpokedata
-print('LOADING ROUTES 3')
 
 @app.route('/')
 def home():
-    print('IN HOME RUTE!!!!!!')
     return render_template('index.html', title="PokeAPI BattlerXXX!")
 
 @app.route('/howitworks')
@@ -57,8 +51,22 @@ def battle():
 
 @app.route('/results', methods=['POST', 'GET']) 
 def results():
-    form = PokeResults()
-    lines = BattleDB.query.all()
-    return render_template('results.html', form=form, lines=lines)
+    id = request.args.get("id")
+    name = request.args.get("name")
+    place = request.args.get("place")
+    if id is not None:
+        lines= BattleDB.query.filter_by(id = id)
+    elif place is not None:
+        if place == '1':
+            lines= BattleDB.query.filter(BattleDB.YourPokemon == name)
+        elif place == '2':
+            lines= BattleDB.query.filter(BattleDB.OpponentsPokemon == name)
+        else:
+            lines= BattleDB.query.filter(BattleDB.Winner == name)
+    else:
+        lines = BattleDB.query.all()
+    
+
+    return render_template('results.html', id=id, name=name, place=place, lines=lines)
     
 
